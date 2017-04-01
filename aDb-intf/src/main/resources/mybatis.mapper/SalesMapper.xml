@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mybatis.mapper.SalesMapper" >
+  <resultMap id="BaseResultMap" type="Sales" >
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="product" property="product" jdbcType="VARCHAR" />
+    <result column="profit" property="profit" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="Sales" >
+    insert into sales (year, country, product, 
+      profit)
+    values (#{year,jdbcType=INTEGER}, #{country,jdbcType=VARCHAR}, #{product,jdbcType=VARCHAR}, 
+      #{profit,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="Sales" >
+    insert into sales
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="product != null" >
+        product,
+      </if>
+      <if test="profit != null" >
+        profit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="year != null" >
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="product != null" >
+        #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="profit != null" >
+        #{profit,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>
